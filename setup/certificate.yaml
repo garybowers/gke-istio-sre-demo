@@ -1,0 +1,15 @@
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: ingressgateway-certs 
+  namespace: istio-system
+spec:
+  secretName: istio-ingressgateway-certs
+  commonName: '*.bowers1.com'
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+  dnsNames:
+  - '*.bowers1.com'
+  - 'bowers1.com'

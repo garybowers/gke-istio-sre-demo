@@ -1,0 +1,38 @@
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt
+spec:
+  acme:
+    email: gary@bowers1.com
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt-private-key
+    solvers:
+    - dns01:
+        clouddns:
+          serviceAccountSecretRef:
+            name: clouddns-dns01-solver-svc-acct
+            key: credentials.json
+          project: b1-services-230040
+      selector: {}
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-staging
+spec:
+  acme:
+    email: gary@bowers1.com
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt-private-key-staging
+    solvers:
+    - dns01:
+        clouddns:
+          serviceAccountSecretRef:
+            name: clouddns-dns01-solver-svc-acct
+            key: credentials.json
+          project: b1-services-230040
+      selector: {}
